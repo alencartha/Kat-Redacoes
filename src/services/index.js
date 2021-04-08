@@ -1,20 +1,18 @@
 // ----- LOGIN -----
 
-export const handleSignUp = (email, password) => firebase.auth()
-  .createUserWithEmailAndPassword(email, password);
+export const handleSignUp = (email, password) =>
+  firebase.auth().createUserWithEmailAndPassword(email, password);
 
 export const handleGoogleSignIn = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
   return firebase.auth().signInWithPopup(provider);
 };
 
-export const handleSignIn = (email, password) => firebase.auth()
-  .signInWithEmailAndPassword(email, password);
+export const handleSignIn = (email, password) =>
+  firebase.auth().signInWithEmailAndPassword(email, password);
 
 export const handleSignOut = () => {
-  firebase
-    .auth()
-    .signOut();
+  firebase.auth().signOut();
 };
 
 export const createPost = (post) => {
@@ -27,11 +25,10 @@ export const createPost = (post) => {
       name: user.displayName,
       user_id: user.uid,
       text: post,
-      date: date.toLocaleString(),
+      date: date.toLocaleString('pt-BR', { timeZone: 'UTC' }),
       time: date.getTime(),
       usersLike: [],
       usersDislike: [],
-
     })
     .then(() => Promise.resolve(true))
     .catch((error) => Promise.reject(error));
@@ -41,7 +38,7 @@ export const getPosts = () => {
   const post = firebase
     .firestore()
     .collection('post')
-    .orderBy('date', 'desc');
+    .orderBy('date', 'desc')
   return post.get();
 };
 
