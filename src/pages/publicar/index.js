@@ -10,10 +10,6 @@ export const publicar = () => {
      
     </header> 
     <main>
-      <section id="user-container">
-        <img id="photoUser" class="user-item">
-        <h2 class="user-item" id="hello-user"> </h2>
-      </section>
       <section class="page-section">
         <label class="title" for="title">Publicar</label>
         <textarea id="post-user" cols="50" rows="20" placeholder="Escreva aqui..."></textarea>

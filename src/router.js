@@ -1,6 +1,6 @@
 // Este é seu ponto de entrada da sua aplicação
 import { Login } from './pages/login/index.js';
-import {createAccount} from './pages/createAccount/index.js';
+import { createAccount } from './pages/createAccount/index.js';
 import { publicar } from './pages/publicar/index.js';
 import { publicacoes } from './pages/publicacoes/index.js';
 import { onNavigate } from './utils/history.js';
@@ -11,7 +11,7 @@ const routeRender = () => {
     '/': Login,
     '/criar-conta': createAccount,
     '/publicar': publicar,
-    '/publicacoes':publicacoes
+    '/publicacoes': publicacoes,
   };
 
   rootDiv.innerHTML = '';
@@ -20,6 +20,6 @@ const routeRender = () => {
 
 window.addEventListener('popstate', routeRender);
 window.addEventListener('load', () => {
-    onNavigate('/');;
+  onNavigate('/');
   routeRender();
 });

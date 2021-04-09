@@ -62,8 +62,6 @@ export const addPost = (post) => {
   postTemplate
     .querySelector(`#btn-like-${id}`)
     .addEventListener('click', () => {
-      const btnLike = postTemplate.querySelector('.btn-like');
-      btnLike.style.opacity = '99';
       const currentUserLike = firebase.auth().currentUser.uid;
       const verifyUserLike = arrayLikes.find(
         (element) => element === currentUserLike
@@ -77,6 +75,8 @@ export const addPost = (post) => {
             const numberOfLikes = Number(numberOfLikesElement.textContent);
             numberOfLikesElement.textContent = numberOfLikes + 1;
             arrayLikes.push(currentUserLike);
+            const btnLike = postTemplate.querySelector('.btn-like');
+            btnLike.style.opacity = '99';
           })
           .catch((error) => {
             const errorMessage = error.message;

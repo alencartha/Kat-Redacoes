@@ -21,10 +21,6 @@ export const headerMain = () => {
               <h3 ><a  class="option-item" id="post">Publicar</a></h3>
               <h3 ><a  class="option-item" id="publicacoes">Publicações</a></h3>
             </section>
-  
-              <section id=recent-container>
-                  <h4>Publicações</h4>
-              </section>
               
               <section>
                   <div id=text></div>
