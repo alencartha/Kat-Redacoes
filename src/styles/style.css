@@ -36,14 +36,16 @@ body{
 
 /* ----------------HEADER-------------------------- */
 
-/* 
-#logo {
-    max-width: 50px;
+
+#logo-main {
+    width: 50px;
+    cursor: pointer;
 }
 
 #exit {
-    max-width: 50px;
-} */
+    width: 50px;
+    cursor: pointer;
+}
 
 /*  -----------------------NAVBAR-------------------------- * */
 

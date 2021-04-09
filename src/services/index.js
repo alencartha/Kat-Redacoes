@@ -27,6 +27,9 @@ export const createPost = (post) => {
       text: post,
       date: date.toLocaleString('pt-BR', { timeZone: 'UTC' }),
       time: date.getTime(),
+      dataString: `${date.toLocaleDateString('pt-BR', {
+        timeZone: 'UTC',
+      })} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`,
       usersLike: [],
       usersDislike: [],
     })
@@ -35,10 +38,7 @@ export const createPost = (post) => {
 };
 
 export const getPosts = () => {
-  const post = firebase
-    .firestore()
-    .collection('post')
-    .orderBy('date', 'desc')
+  const post = firebase.firestore().collection('post').orderBy('date', 'desc');
   return post.get();
 };
 

@@ -34,7 +34,7 @@ export const Login = () => {
             </span>
             <span>Entrar com Google</span>
         </button>
-        <p>Ainda não possui cadastro, <a id="register" href="/createAccount">registre-se.</a></p>
+        <p>Ainda não possui cadastro, <a id="register">registre-se.</a></p>
       </form>
     </section>
     <footer id="footer">
@@ -51,6 +51,7 @@ export const Login = () => {
 
   const btnGoogle = rootElement.querySelector('#btnGoogle');
   const btnLogin = rootElement.querySelector('#btnLogin');
+  const btnSignUp = rootElement.querySelector('#register');
 
   btnLogin.addEventListener('click', () => {
     const email = rootElement.querySelector('#email').value;
@@ -74,6 +75,10 @@ export const Login = () => {
         const errorMessage = error.message;
         showModal(errorMessage);
       });
+  });
+
+  btnSignUp.addEventListener('click', () => {
+    onNavigate('/criar-conta');
   });
 
   return rootElement;

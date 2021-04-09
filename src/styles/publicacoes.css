@@ -17,11 +17,9 @@ body{
 #post-infos{
     padding: 33px;
     margin-top: 26px;
+    display: flex;
     background-color: #ffffffc2;
     padding-left: 10px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
     border: solid 2px transparent;
     box-shadow: 0 0 0.2em #3C3B37;
     border-radius: 5px;
@@ -48,7 +46,6 @@ body{
 
 .text-post{
     margin: 0px; 
-    width: 311px; 
     height: 108px; 
     resize: none;
     text-align: center;
@@ -299,6 +296,5 @@ body{
         cursor: pointer;
         margin-left: 10px;
     }
-
 
 }

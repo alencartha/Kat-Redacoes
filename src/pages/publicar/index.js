@@ -1,17 +1,13 @@
 import { createPost, handleSignOut } from '../../services/index.js';
 import { onNavigate } from '../../utils/history.js';
+import { headerMain } from '../../components/headerMain.js';
 import showModal from '../../components/showModal.js';
 
 export const publicar = () => {
   const rootElement = document.createElement('div');
   rootElement.innerHTML = `
-    <header id="header">
-      <img id="logo" src="../../img/Logo/logo-temporario-red.png" alt="Logo do Site">
-      <section id="option-container">
-          <h3 ><a href="publicar" class="option-item" id="posts-view">Publicar</a></h3>
-          <h3 ><a href="publicacoes" class="option-item" id="posts-view">Publicações</a></h3>
-      </section>
-      <input id="exit" type="image" src="../../img/Logout/logout-red.png" alt="Logout" />
+    <header id="header-main-publicar">
+     
     </header> 
     <main>
       <section id="user-container">
@@ -28,16 +24,8 @@ export const publicar = () => {
      </section>   
   `;
 
-  const userName = rootElement.querySelector('#hello-user');
-  const photoPerfil = rootElement.querySelector('#photoUser');
-  firebase.auth().onAuthStateChanged((user) => {
-    if (user != null) {
-      userName.innerHTML = `Olá, ${user.displayName}!`;
-      photoPerfil.src = user.photoURL;
-    } else {
-      onNavigate('/');
-    }
-  });
+  const headerMainPost = rootElement.querySelector('#header-main-publicar');
+  headerMainPost.appendChild(headerMain());
 
   const post = rootElement.querySelector('#postar');
   const mensagem = rootElement.querySelector('#post-user');
@@ -56,7 +44,7 @@ export const publicar = () => {
   btnExit.addEventListener('click', (event) => {
     event.preventDefault();
     handleSignOut();
-    onNavigate('/login');
+    onNavigate('/');
   });
 
   return rootElement;

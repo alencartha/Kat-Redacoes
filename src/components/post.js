@@ -1,12 +1,15 @@
 import {
-  likePost, removeLike, editPost, dislikePost, removeDislike, deletePost,
+  likePost,
+  removeLike,
+  editPost,
+  dislikePost,
+  removeDislike,
+  deletePost,
 } from '../services/index.js';
 import showModal from './showModal.js';
 
 export const addPost = (post) => {
-  const {
-    name, text, date, usersLike, usersDislike,
-  } = post.data();
+  const { name, text, date, usersLike, usersDislike } = post.data();
   const { id } = post;
   let arrayLikes = usersLike;
   let arrayDislikes = usersDislike;
@@ -31,9 +34,9 @@ export const addPost = (post) => {
 
         <section id="container-edit"> 
           <div class="item-edit">
-            <img src="../../img/Like/like-black.png" alt="like" id="btn-like-${id}" class="btn-like">
+            <img src="../../img/Like/like-black.png" alt="like" id="btn-like-${id}" class="btn-like" style='opacity:.5'>
             <p id="number-of-likes" class= "number-of-likes">${arrayLikes.length}</p>
-            <img src="../../img/Dislike/dislike-red1.png" alt="dislike" class="btn-dislike" id="btn-dislike-${id}">
+            <img src="../../img/Dislike/dislike-red1.png" alt="dislike" class="btn-dislike" id="btn-dislike-${id}" style='opacity:.5'>
             <p id="number-of-dislikes" class= "number-of-likes">${arrayDislikes.length}</p>
           </div>
           <div class="item-edit">
@@ -56,103 +59,137 @@ export const addPost = (post) => {
 
   showEditsForCurrentUser();
 
-  postTemplate.querySelector(`#btn-like-${id}`).addEventListener('click', () => {
-    const currentUserLike = firebase.auth().currentUser.uid;
-    const verifyUserLike = arrayLikes.find((element) => element === currentUserLike);
-    if (!verifyUserLike) {
-      likePost(id, currentUserLike)
-        .then(() => {
-          const numberOfLikesElement = postTemplate.querySelector('#number-of-likes');
-          const numberOfLikes = Number(numberOfLikesElement.textContent);
-          numberOfLikesElement.textContent = numberOfLikes + 1;
-          arrayLikes.push(currentUserLike);
-        })
-        .catch((error) => {
-          const errorMessage = error.message;
-          showModal(errorMessage);
-        });
-    } else {
-      removeLike(id, currentUserLike)
-        .then(() => {
-          const numberOfLikesElement = postTemplate.querySelector('#number-of-likes');
-          const numberOfLikes = Number(numberOfLikesElement.textContent);
-          numberOfLikesElement.textContent = numberOfLikes - 1;
-          arrayLikes = arrayLikes.filter(((element) => element !== currentUserLike));
-        })
-        .catch((error) => {
-          const errorMessage = error.message;
-          showModal(errorMessage);
-        });
-    }
-  });
+  postTemplate
+    .querySelector(`#btn-like-${id}`)
+    .addEventListener('click', () => {
+      const btnLike = postTemplate.querySelector('.btn-like');
+      btnLike.style.opacity = '99';
+      const currentUserLike = firebase.auth().currentUser.uid;
+      const verifyUserLike = arrayLikes.find(
+        (element) => element === currentUserLike
+      );
+      if (!verifyUserLike) {
+        likePost(id, currentUserLike)
+          .then(() => {
+            const numberOfLikesElement = postTemplate.querySelector(
+              '#number-of-likes'
+            );
+            const numberOfLikes = Number(numberOfLikesElement.textContent);
+            numberOfLikesElement.textContent = numberOfLikes + 1;
+            arrayLikes.push(currentUserLike);
+          })
+          .catch((error) => {
+            const errorMessage = error.message;
+            showModal(errorMessage);
+          });
+      } else {
+        removeLike(id, currentUserLike)
+          .then(() => {
+            const numberOfLikesElement = postTemplate.querySelector(
+              '#number-of-likes'
+            );
+            const numberOfLikes = Number(numberOfLikesElement.textContent);
+            numberOfLikesElement.textContent = numberOfLikes - 1;
+            arrayLikes = arrayLikes.filter(
+              (element) => element !== currentUserLike
+            );
+          })
+          .catch((error) => {
+            const errorMessage = error.message;
+            showModal(errorMessage);
+          });
+      }
+    });
 
-  postTemplate.querySelector(`#btn-dislike-${id}`).addEventListener('click', () => {
-    const currentUserDislike = firebase.auth().currentUser.uid;
-    const verifyUserDislike = arrayDislikes.find((element) => element === currentUserDislike);
-    if (!verifyUserDislike) {
-      dislikePost(id, currentUserDislike)
-        .then(() => {
-          const numberOfDislikesElement = postTemplate.querySelector('#number-of-dislikes');
-          const numberOfDislikes = Number(numberOfDislikesElement.textContent);
-          numberOfDislikesElement.textContent = numberOfDislikes + 1;
-          arrayDislikes.push(currentUserDislike);
-        })
-        .catch((error) => {
-          const errorMessage = error.message;
-          showModal(errorMessage);
-        });
-    } else {
-      removeDislike(id, currentUserDislike)
-        .then(() => {
-          const numberOfDislikesElement = postTemplate.querySelector('#number-of-dislikes');
-          const numberOfDislikes = Number(numberOfDislikesElement.textContent);
-          numberOfDislikesElement.textContent = numberOfDislikes - 1;
-          arrayDislikes = arrayDislikes.filter(((element) => element !== currentUserDislike));
-        })
-        .catch((error) => {
-          const errorMessage = error.message;
-          showModal(errorMessage);
-        });
-    }
-  });
+  postTemplate
+    .querySelector(`#btn-dislike-${id}`)
+    .addEventListener('click', () => {
+      const btnDislike = postTemplate.querySelector('.btn-dislike');
+      btnDislike.style.opacity = '99';
+      const currentUserDislike = firebase.auth().currentUser.uid;
+      const verifyUserDislike = arrayDislikes.find(
+        (element) => element === currentUserDislike
+      );
+      if (!verifyUserDislike) {
+        dislikePost(id, currentUserDislike)
+          .then(() => {
+            const numberOfDislikesElement = postTemplate.querySelector(
+              '#number-of-dislikes'
+            );
+            const numberOfDislikes = Number(
+              numberOfDislikesElement.textContent
+            );
+            numberOfDislikesElement.textContent = numberOfDislikes + 1;
+            arrayDislikes.push(currentUserDislike);
+          })
+          .catch((error) => {
+            const errorMessage = error.message;
+            showModal(errorMessage);
+          });
+      } else {
+        removeDislike(id, currentUserDislike)
+          .then(() => {
+            const numberOfDislikesElement = postTemplate.querySelector(
+              '#number-of-dislikes'
+            );
+            const numberOfDislikes = Number(
+              numberOfDislikesElement.textContent
+            );
+            numberOfDislikesElement.textContent = numberOfDislikes - 1;
+            arrayDislikes = arrayDislikes.filter(
+              (element) => element !== currentUserDislike
+            );
+          })
+          .catch((error) => {
+            const errorMessage = error.message;
+            showModal(errorMessage);
+          });
+      }
+    });
 
   const saveEdit = () => {
-    postTemplate.querySelector(`#btn-save-edit${id}`).addEventListener('click', () => {
-      const textAreaUpdate = postTemplate.querySelector('.text-post');
-      const btnSaveEdit = postTemplate.querySelector('.btn-save-edit');
-      btnSaveEdit.style.display = 'block';
-      editPost(textAreaUpdate.value, id)
-        .then(() => {
-          textAreaUpdate.setAttribute('disabled', 'disabled');
-          btnSaveEdit.style.display = 'none';
-        })
-        .catch((error) => {
-          const errorMessage = error.message;
-          showModal(errorMessage);
-        });
-    });
+    postTemplate
+      .querySelector(`#btn-save-edit${id}`)
+      .addEventListener('click', () => {
+        const textAreaUpdate = postTemplate.querySelector('.text-post');
+        const btnSaveEdit = postTemplate.querySelector('.btn-save-edit');
+        btnSaveEdit.style.display = 'block';
+        editPost(textAreaUpdate.value, id)
+          .then(() => {
+            textAreaUpdate.setAttribute('disabled', 'disabled');
+            btnSaveEdit.style.display = 'none';
+          })
+          .catch((error) => {
+            const errorMessage = error.message;
+            showModal(errorMessage);
+          });
+      });
   };
 
-  postTemplate.querySelector(`#btn-edit-${id}`).addEventListener('click', () => {
-    const textArea = postTemplate.querySelector('.text-post');
-    textArea.removeAttribute('disabled');
-    const btnSaveEdit = postTemplate.querySelector('.btn-save-edit');
-    btnSaveEdit.style.display = 'block';
-    saveEdit();
-  });
+  postTemplate
+    .querySelector(`#btn-edit-${id}`)
+    .addEventListener('click', () => {
+      const textArea = postTemplate.querySelector('.text-post');
+      textArea.removeAttribute('disabled');
+      const btnSaveEdit = postTemplate.querySelector('.btn-save-edit');
+      btnSaveEdit.style.display = 'block';
+      saveEdit();
+    });
 
-  postTemplate.querySelector(`#btn-delete-post${id}`).addEventListener('click', () => {
-    if (window.confirm('Tem certeza que deseja excluir a publicação?')) {
-      deletePost(id)
-        .then(() => {
-          postTemplate.style.display = 'none';
-        })
-        .catch((error) => {
-          const errorMessage = error.message;
-          showModal(errorMessage);
-        });
-    }
-  });
+  postTemplate
+    .querySelector(`#btn-delete-post${id}`)
+    .addEventListener('click', () => {
+      if (window.confirm('Tem certeza que deseja excluir a publicação?')) {
+        deletePost(id)
+          .then(() => {
+            postTemplate.style.display = 'none';
+          })
+          .catch((error) => {
+            const errorMessage = error.message;
+            showModal(errorMessage);
+          });
+      }
+    });
 
   return postTemplate;
 };
