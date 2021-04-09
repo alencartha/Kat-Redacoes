@@ -211,10 +211,6 @@ footer{
         order: 1;
         width: 300px;
     }
-
-    footer{
-        position: relative;
-    }
 }
 
 @media only screen and (min-width: 1200px) {

@@ -57,7 +57,11 @@ export const Login = () => {
     const email = rootElement.querySelector('#email').value;
     const password = rootElement.querySelector('#password').value;
     handleSignIn(email, password)
-      .then(() => {
+      .then((data) => {
+        const { email } = data;
+        const { name } = data;
+          localStorage.setItem('email', email);
+          localStorage.setItem('name', name);
         onNavigate('/publicacoes');
       })
       .catch((error) => {

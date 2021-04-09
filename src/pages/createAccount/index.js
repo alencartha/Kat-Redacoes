@@ -1,5 +1,8 @@
 import { handleSignUp } from '../../services/index.js';
-import { validatePassword, validateEmptyInput } from '../../utils/validation.js';
+import {
+  validatePassword,
+  validateEmptyInput,
+} from '../../utils/validation.js';
 import showModal from '../../components/showModal.js';
 import { onNavigate } from '../../utils/history.js';
 
@@ -20,6 +23,7 @@ export const createAccount = () => {
                 <input class="input" id="samePassword" type="password" placeholder="Repita sua senha" required>
             </p>
             <button type="button" id="btnCreateAccount">Cadastre-se</button>
+            <p><a id="login-route">Ir para Login</a></p>
         </form>
         <footer id="footer">
         <div id="kat">
@@ -34,6 +38,11 @@ export const createAccount = () => {
         
     `;
   const btnCreateAccount = rootElement.querySelector('#btnCreateAccount');
+  const routeLogin = rootElement.querySelector('#login-route');
+
+  routeLogin.addEventListener('click', (event) => {
+    onNavigate('/');
+  })
 
   btnCreateAccount.addEventListener('click', (event) => {
     event.preventDefault();
@@ -49,7 +58,8 @@ export const createAccount = () => {
     }
     const returnValidateInput = validateEmptyInput(firstName, lastName);
     if (!returnValidateInput) {
-      const errorMessage = 'Os campos Nome e Sobrenome são de preenchimento obrigatório';
+      const errorMessage =
+        'Os campos Nome e Sobrenome são de preenchimento obrigatório';
       showModal(errorMessage);
     }
     if (returnValidatePassword && returnValidateInput) {
@@ -59,7 +69,7 @@ export const createAccount = () => {
           user.user.updateProfile({ displayName: userName });
           const message = 'Usuário criado com sucesso!';
           showModal(message);
-          onNavigate('/publicacoes');
+          onNavigate('/');
         })
         .catch((error) => {
           const errorMessage = error.message;
