@@ -157,6 +157,10 @@ a:hover {
     filter: drop-shadow(0 0 1px black);
 }
 
+#register{
+    cursor: pointer;
+}
+
 footer{
     position: fixed;
     bottom: 0;
