@@ -37,7 +37,7 @@ export const Login = () => {
         <p>Ainda não possui cadastro, <a id="register">registre-se.</a></p>
       </form>
     </section>
-    <footer id="footer">
+    <footer>
       <div id="kat">
         <p id="copy">&copy; Desenvolvido por KAT - Redações</p>
       </div>

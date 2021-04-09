@@ -6,12 +6,13 @@ import {
 import showModal from '../../components/showModal.js';
 import { onNavigate } from '../../utils/history.js';
 
+
 export const createAccount = () => {
   const rootElement = document.createElement('div');
   rootElement.innerHTML = `
         <form id="formCreateAccount">
             <section>
-                <h2>Novo por aqui</h2>
+                <h2>Novo por aqui?</h2>
                 <h2>Cadastre-se</h2>
                 <h3>É rápido e fácil!</h3>
             </section>
@@ -25,16 +26,7 @@ export const createAccount = () => {
             <button type="button" id="btnCreateAccount">Cadastre-se</button>
             <p><a id="login-route">Ir para Login</a></p>
         </form>
-        <footer id="footer">
-        <div id="kat">
-          <p id="copy">&copy; Desenvolvido por KAT - Redações</p>
-        </div>
-        <div id="devs">
-          <p><a id="ale" href="http://github.com/ale-alves/" target="_blank">Alessandra Alves</a></p>
-          <p><a id="kau" href="http://github.com/kauanaagostini/" target="_blank">Kauana Agostini</a></p>
-          <p><a id="tha" href="http://github.com/alencartha/" target="_blank">Thaís Alencar</a></p>
-        </div>
-      </footer>
+        <img id="img-register" src='../../img/readme/KAT_Redacoes.jpg'/>
         
     `;
   const btnCreateAccount = rootElement.querySelector('#btnCreateAccount');
